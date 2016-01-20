@@ -54,7 +54,7 @@ var PATHS = {
     'bower_components/foundation-sites/js/foundation.tabs.js',
     'bower_components/foundation-sites/js/foundation.toggler.js',
     'bower_components/foundation-sites/js/foundation.tooltip.js',
-    'src/assets/js/!(app.js)**/*.js',
+    'src/assets/js/**/!(app).js',
     'src/assets/js/app.js'
   ]
 };
@@ -80,13 +80,17 @@ gulp.task('jekyll', function(done) {
     .on('close', done);
 });
 
+gulp.task('jekyll:reset', ['jekyll'], function () {
+    browser.reload();
+});
+
 // Compile Sass into CSS
 // In production, the CSS is compressed
 gulp.task('sass', function() {
   var uncss = $.if(isProduction, $.uncss({
     html: ['src/**/*.html'],
     ignore: [
-      new RegExp('^meta\..*'),
+      new RegExp('.foundation-mq'),
       new RegExp('^\.is-.*')
     ]
   }));
@@ -105,7 +109,8 @@ gulp.task('sass', function() {
     .pipe(uncss)
     .pipe(minifycss)
     .pipe($.if(!isProduction, $.sourcemaps.write()))
-    .pipe(gulp.dest('dist/assets/css'));
+    .pipe(gulp.dest('dist/assets/css'))
+    .pipe(browser.reload({ stream: true }));
 });
 
 // Combine JavaScript into one file
@@ -121,7 +126,8 @@ gulp.task('javascript', function() {
     .pipe($.concat('app.js'))
     .pipe(uglify)
     .pipe($.if(!isProduction, $.sourcemaps.write()))
-    .pipe(gulp.dest('dist/assets/js'));
+    .pipe(gulp.dest('dist/assets/js'))
+    .on('finish', browser.reload);
 });
 
 // Copy images to the "dist" folder
@@ -133,7 +139,8 @@ gulp.task('images', function() {
 
   return gulp.src('src/assets/img/**/*')
     .pipe(imagemin)
-    .pipe(gulp.dest('dist/assets/img'));
+    .pipe(gulp.dest('dist/assets/img'))
+    .on('finish', browser.reload);
 });
 
 // Build the "dist" folder by running all of the above tasks
@@ -150,9 +157,9 @@ gulp.task('server', ['build'], function() {
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default', ['build', 'server'], function() {
-  gulp.watch(PATHS.assets, ['copy', browser.reload]);
-  gulp.watch(PATHS.jekyll, ['jekyll', browser.reload]);
-  gulp.watch(['src/assets/scss/**/*.scss'], ['sass', browser.reload]);
-  gulp.watch(['src/assets/js/**/*.js'], ['javascript', browser.reload]);
-  gulp.watch(['src/assets/img/**/*'], ['images', browser.reload]);
+  gulp.watch(PATHS.assets, ['copy']);
+  gulp.watch(PATHS.jekyll, ['jekyll:reset']);
+  gulp.watch(['src/assets/scss/**/{*.scss, *.sass}'], ['sass']);
+  gulp.watch(['src/assets/js/**/*.js'], ['javascript']);
+  gulp.watch(['src/assets/img/**/*'], ['images']);
 });
