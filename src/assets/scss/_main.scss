@@ -1,0 +1,223 @@
+/************************************************
+
+Stylesheet: Main Stylesheet
+
+*************************************************/
+
+/*********************
+GENERAL STYLES
+*********************/
+
+/*********************
+LINK STYLES
+*********************/
+a, a:visited {
+
+	// Mobile tap color
+	&:link {
+		//Highlight links on iOS, Similar to :hover for mobile devices.
+		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+	}
+}
+
+/*********************
+H1, H2, H3, H4, H5 P STYLES
+*********************/
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+
+	// Removing text decoration from all headline links
+	a {
+		text-decoration: none;
+	}
+}
+
+h1, .h1 {
+
+}
+
+h2, .h2 {
+
+}
+
+h3, .h3 {
+
+}
+
+h4, .h4 {
+	
+}
+
+h5, .h5 {
+
+}
+
+/*********************
+HEADER STYLES
+*********************/
+.header {
+	ul.off-canvas-list li {
+		list-style: none;
+	}
+}
+    
+/*********************
+NAVIGATION STYLES
+*********************/
+.top-bar {
+	.title-area {
+		z-index: 1;
+	}
+} 
+
+.off-canvas-list {
+	ul {
+		margin-left: 0;
+		li {
+			a {
+				border-bottom: 0px;
+			}
+		}
+		.dropdown {
+			margin-left: 20px;
+		}
+	}
+}
+
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+#content {
+	#inner-content {
+		padding: 1rem 0rem;
+	}
+}
+
+.single-title,
+.page-title {
+	
+}
+
+.single-title {
+	
+}
+
+.page-title {
+	
+	// Remove Foundation vcard styling from author page titles
+	.vcard {
+		border: 0px;
+		padding: 0px;
+	}
+}
+
+.archive-title {
+
+}
+
+// Post meta  
+.byline {
+	color: #999;
+	time {}
+}
+
+// Entry content  
+.entry-content {
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.alignleft, img.alignleft { 
+		margin-right: 1.5em; 
+		display: inline; 
+		float: left; 
+	}
+	.alignright, img.alignright { 
+		margin-left: 1.5em; 
+		display: inline; 
+		float: right; 
+	}
+	.aligncenter, img.aligncenter { 
+		margin-right: auto; 
+		margin-left: auto; 
+		display: block; 
+		clear: both; 
+	}
+			
+	video, object {
+		max-width: 100%;
+		height: auto;
+		}
+
+	pre {
+		background: #eee;
+		border: 1px solid #cecece;
+		padding: 10px;
+		}
+
+} 
+
+// Add Foundation styling to password protect button
+.post-password-form input[type="submit"] {
+	@include button;
+}
+
+/*********************
+PAGE NAVI STYLES
+*********************/
+.page-navigation {
+	margin-top: 1rem;
+}
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+.sidebar {
+}
+
+#searchsubmit {
+}
+
+.widgettitle {
+}
+
+.widget {
+	ul {
+		margin: 0;
+
+		li {
+			list-style: none;
+
+			&:first-child {}
+
+			&:last-child {}
+
+			a {}
+
+			// deep nesting  
+			ul {}
+
+		}
+	}
+}
+/*********************
+FOOTER STYLES
+*********************/
+.footer {
+	clear: both;
+	margin-top: 1em;
+}
+	
+/*********************
+FOUNDATION STYLES
+*********************/
+
+/*********************
+PLUGIN STYLES
+*********************/
+// Makes Gravity Forms play nice with Foundation Form styles
+.gform_body ul {
+    list-style: none outside none;
+    margin: 0;
+}

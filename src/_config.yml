@@ -23,3 +23,17 @@ markdown: kramdown
 # Assets are being handled by Gulp
 exclude: [assets]
 keep_files: [assets]
+
+# google analytics
+google_ua: ""
+
+#font services
+## add type kit id here. Example xxxxxxx
+type_kit: ""
+
+## add the font family here. Example "Hind+Guntur:400,500,600"
+google_fonts: ""
+
+# Plugins
+gems: [jekyll-paginate]
+paginate: 10
