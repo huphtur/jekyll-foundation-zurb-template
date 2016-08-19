@@ -1,0 +1,56 @@
+---
+layout: page
+---
+{% if site.posts.size > 0 %}
+	{% for post in paginator.posts %}
+		<article role="article">					
+			<header class="article-header">
+				<h2><a href="{{ post.url }}" rel="bookmark" title="{{ post.title }}">{{ post.title }}</a></h2>
+				<p class="byline">
+					Posted on {{ post.date | date: '%B %d, %Y' }} 
+					{% if post.author != '' %}
+						by {{ post.author }}
+					{% endif %}
+				</p>	
+			</header> <!-- end article header -->
+							
+			<section class="entry-content" itemprop="articleBody">
+				{{ post.excerpt }}
+				<a href="{{ post.url }}">...Read More</a>
+			</section> <!-- end article section -->
+								
+			<footer class="article-footer">
+			</footer> <!-- end article footer -->				    						
+		</article> <!-- end article -->
+	{% endfor %}
+	
+	{% if paginator.total_pages > 1 %}
+		<ul class="pagination" role="navigation" aria-label="Pagination">
+			{% if paginator.previous_page %}
+				<li class="pagination-previous"><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">Previous <span class="show-for-sr">page</span></a></li>
+			{% else %}
+				<li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></span></li>
+			{% endif %}
+			
+			{% for page in (1..paginator.total_pages) %}
+				{% if page == paginator.page %}
+					<li class="current">{{ page }}</li>
+				{% elsif page == 1 %}
+					<li><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Page {{ page }}">{{ page }}</a></li>
+				{% else %}
+					<li><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}"  aria-label="Page {{ page }}">{{ page }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if paginator.next_page %}
+			<li class="pagination-next"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+			{% else %}
+				<li class="pagination-next disabled">Next <span class="show-for-sr">page</span></span></li>
+			{% endif %}
+		</ul>
+	{% endif %}
+
+	
+	
+{% else %}
+	{% include _parts/content-missing.html %}
+{% endif %}

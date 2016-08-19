@@ -1,0 +1,19 @@
+{% assign breakpoint = "medium" %}
+
+<div class="title-bar" data-responsive-toggle="top-bar-menu" data-hide-for="{{ breakpoint }}">
+	<button class="menu-icon" type="button" data-toggle=""></button>
+	<div class="title-bar-title">Menu</div>
+</div>
+
+<div class="top-bar" id="top-bar-menu">
+	<div class="top-bar-left show-for-{{ breakpoint }}">
+		<ul class="menu">
+			<li><a href="{{ site.baseurl }}">{{ site.title }}</a></li>
+		</ul>
+	</div>
+	<div class="top-bar-right">
+		<ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
+			{% include main-nav.html %}
+		</ul>
+	</div>
+</div>

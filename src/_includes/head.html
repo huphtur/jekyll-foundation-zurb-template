@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta class="foundation-mq">
+		<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+		
+		<!-- favicon -->
+		<link rel="icon" href="{{ site.baseurl }}/favicon.png">
+		<!--[if IE]>
+			<link rel="shortcut icon" href="{{ site.baseurl }}//favicon.ico">
+		<![endif]-->
+		
+		<!-- site icon -->
+		<link href="{{ site.baseurl }}/assets/img/site-icon.png" rel="apple-touch-icon" />
+		<meta name="msapplication-TileColor" content="#f01d4f">
+		<meta name="msapplication-TileImage" content="{{ site.baseurl }}/assets/img/site-icon.png">
+	    <meta name="theme-color" content="#121212">
+	    	
+		{% if site.type_kit != '' %}
+			<!-- typekit fonts -->
+			<script src="https://use.typekit.net/{{ site.type_kit }}.js"></script>
+			<script>try{Typekit.load({ async: true });}catch(e){}</script>
+		{% endif %}
+		
+		{% if site.google_fonts != '' %}
+			<!-- google font -->
+			<link href="https://fonts.googleapis.com/css?family={{ site.google_fonts }}" rel="stylesheet">
+		{% endif %}
+		
+		<link rel="stylesheet" href="{{ "/assets/css/app.css" | prepend: site.baseurl }}">
+		
+		{% if site.google_ua != '' %}
+			<!-- google analytics -->
+			<script type="text/javascript">
+				var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+				document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+			</script>
+			<script type="text/javascript">
+				try {
+					var pageTracker = _gat._getTracker("{{ site.google_ua }}");
+					pageTracker._trackPageview();
+				} catch(err) {}
+			</script>
+		{% endif %}
+		
+	</head>
+	<body>
